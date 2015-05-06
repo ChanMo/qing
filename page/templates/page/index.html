@@ -1,0 +1,9 @@
+{% extends "page/base.html" %}
+{% block title %}首页{% endblock %}
+{% block content %}
+<ul class="row" id="home">
+  {% for page in page_list %}
+  <a class="small-6 large-4 columns" href="{% url 'page:page-detail' page.id %}"><div>{{ page.title }}</div></a>
+  {% endfor %}
+</ul>
+{% endblock %}
