@@ -3,8 +3,8 @@ from .models import Page, Theme, Site, Template
 # Register your models here.
 
 class PageAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description', 'template', 'created')
-    fields = ('title', 'site', 'description', 'content', 'template')
+    list_display = ('parent', 'title', 'description', 'template', 'created')
+    fields = ('parent', 'title', 'site', 'description', 'content', 'template')
     save_as = True
     show_fall_result_count = True
     view_on_site = True
@@ -12,12 +12,16 @@ class PageAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         qs = super(PageAdmin, self).get_queryset(request)
         site = Site.objects.filter(author=request.user)
-        return qs.filter(site=site)
+        return qs.order_by('parent').filter(site=site)
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "site":
             site = Site.objects.filter(author=request.user)
             kwargs['queryset'] = site
+        if db_field.name == "parent":
+            site = Site.objects.filter(author=request.user)
+            parent = Page.objects.filter(site=site)
+            kwargs['queryset'] = parent
         return super(PageAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
 
@@ -30,7 +34,7 @@ class TemplateAdmin(admin.ModelAdmin):
 
 
 class SiteAdmin(admin.ModelAdmin):
-    list_display = ('name', 'theme', 'created')
+    list_display = ('name', 'theme', 'site_link', 'created')
     fields = ('name', 'theme')
 
     def save_model(self, request, obj, form, change):

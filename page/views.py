@@ -9,7 +9,7 @@ class SiteView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(SiteView, self).get_context_data(**kwargs)
         site = Site.objects.filter(author=context['site_id'])
-        context['page_list'] = Page.objects.filter(site=site)
+        context['page_list'] = Page.objects.filter(site=site,parent=None)
         return context
 
 
@@ -23,6 +23,11 @@ class PageView(DetailView):
     model = Page
     # template_name = "page/detail.html"
     context_object_name = "page"
+
+    def get_context_data(self, **kwargs):
+        context = super(PageView, self).get_context_data(**kwargs)
+        context['child_page'] = Page.objects.filter(parent=context['title'])
+        return context
 
     def get_template_names(self):
         return ("page/"+self.object.template.value+".html", "page/detail.html")

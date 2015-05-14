@@ -32,9 +32,13 @@ class Site(models.Model):
     def __unicode__(self):
         return self.name
 
+    def site_link(self):
+        return '127.0.0.1:8000/m/'+str(self.id)
+
 
 class Page(models.Model):
     title = models.CharField(max_length=200, verbose_name='Title')
+    parent = models.ForeignKey('self', null=True, blank=True, default=None);
     site = models.ForeignKey(Site, related_name="Page", default='1')
     description = models.TextField(blank=True, verbose_name='Desc')
     content = RichTextField(verbose_name='Content', config_name='awesome_ckeditor')
