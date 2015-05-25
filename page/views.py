@@ -21,12 +21,11 @@ class IndexView(ListView):
 
 class PageView(DetailView):
     model = Page
-    # template_name = "page/detail.html"
     context_object_name = "page"
 
     def get_context_data(self, **kwargs):
         context = super(PageView, self).get_context_data(**kwargs)
-        context['child_page'] = Page.objects.filter(parent=context['title'])
+        context['child_page'] = Page.objects.filter(parent=self.object.id)
         return context
 
     def get_template_names(self):

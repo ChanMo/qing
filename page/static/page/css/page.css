@@ -1,0 +1,23 @@
+body {
+    background: #DDDDDD;
+}
+
+#content {
+    padding: 20px 10px;
+}
+
+#home {
+    margin-top: 100px;
+}
+
+#home > a {
+    padding: 20px;
+}
+
+#home > a > div {
+    height: 50px;
+    line-height: 50px;
+    background: #39cccc;
+    text-align: center;
+    color: #fff;
+}

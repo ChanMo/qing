@@ -1,5 +1,4 @@
-#!/home/chen/env/bin/python
-# -*- coding: utf8 -*-
+# -*- coding: utf-8 -*-
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -7,30 +6,30 @@ from ckeditor.fields import RichTextField
 
 # Create your models here.
 class Theme(models.Model):
-    name = models.CharField(max_length=200, verbose_name='主题名称')
-    created = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
-    updated = models.DateTimeField(auto_now=True, verbose_name='更新时间')
+    name = models.CharField(max_length=200, verbose_name='Name')
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Created')
+    updated = models.DateTimeField(auto_now=True, verbose_name='Updated')
 
     def __unicode__(self):
         return self.name
 
 
 class Template(models.Model):
-    name = models.CharField(max_length=200, verbose_name='模板名称')
-    value = models.CharField(max_length=200, verbose_name='模板值')
-    created = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
-    updated = models.DateTimeField(auto_now=True, verbose_name='更新时间')
+    name = models.CharField(max_length=200, verbose_name='Name')
+    value = models.CharField(max_length=200, verbose_name='Value')
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Created')
+    updated = models.DateTimeField(auto_now=True, verbose_name='Updated')
 
     def __unicode__(self):
         return self.name
 
 
 class Site(models.Model):
-    name = models.CharField(max_length=200, verbose_name='站点名称')
-    author = models.ForeignKey(User, related_name="站点", default='1')
-    theme = models.ForeignKey(Theme, related_name="站点", default='1', verbose_name='主题')
-    created = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
-    updated = models.DateTimeField(auto_now=True, verbose_name='更新时间')
+    name = models.CharField(max_length=200, verbose_name='Name')
+    author = models.ForeignKey(User, related_name="Site", default='1')
+    theme = models.ForeignKey(Theme, related_name="Site", default='1', verbose_name='Theme')
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Created')
+    updated = models.DateTimeField(auto_now=True, verbose_name='Updated')
 
     def __unicode__(self):
         return self.name
@@ -40,14 +39,14 @@ class Site(models.Model):
 
 
 class Page(models.Model):
-    title = models.CharField(max_length=200, verbose_name='文章标题')
+    title = models.CharField(max_length=200, verbose_name='Title')
     parent = models.ForeignKey('self', null=True, blank=True, default=None);
-    site = models.ForeignKey(Site, related_name="文章", default='1')
-    description = models.TextField(blank=True, verbose_name='描述')
-    content = RichTextField(verbose_name='内容', config_name='awesome_ckeditor')
-    template = models.ForeignKey(Template, related_name="文章", default='1', verbose_name='模板')
-    created = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
-    updated = models.DateTimeField(auto_now=True, verbose_name='更新时间')
+    site = models.ForeignKey(Site, related_name="Page", default='1')
+    description = models.TextField(blank=True, verbose_name='Description')
+    content = RichTextField(verbose_name='Content', config_name='awesome_ckeditor')
+    template = models.ForeignKey(Template, related_name="Page", default='1', verbose_name='Template')
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Created')
+    updated = models.DateTimeField(auto_now=True, verbose_name='Updated')
 
     def __unicode__(self):
         return self.title
