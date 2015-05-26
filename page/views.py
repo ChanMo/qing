@@ -4,6 +4,10 @@ from django.views.generic import View, TemplateView, ListView, DetailView
 from page.models import Page, Site
 
 # Create your views here.
+class IndexView(TemplateView):
+    template_name = "page/home.html"
+
+
 class SiteView(TemplateView):
     template_name = "page/index.html"
     def get_context_data(self, **kwargs):
@@ -11,12 +15,6 @@ class SiteView(TemplateView):
         site = Site.objects.filter(author=context['site_id'])
         context['page_list'] = Page.objects.filter(site=site,parent=None)
         return context
-
-
-class IndexView(ListView):
-    model = Page
-    template_name = "page/index.html"
-    context_object_name = "page_list"
 
 
 class PageView(DetailView):

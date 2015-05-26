@@ -1,13 +1,11 @@
 {% extends "page/base.html" %}
 {% block title %}{{ page.title }}{% endblock %}
 {% block content %}
-<ul>
+<div class="row">
   {% for item in child_page %}
-  <a href="{% url 'page:page-detail' item.id %}">
-    <li>
+  <a href="{% url 'page:page-detail' item.id %}" class="small-12 large-12 columns">
     {{ item }}
-    </li>
   </a>
   {% endfor %}
-</ul>
+</div>
 {% endblock %}
