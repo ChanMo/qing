@@ -1,10 +1,11 @@
 from django.contrib import admin
+from adminsortable2.admin import SortableAdminMixin
 from .models import Page, Theme, Site, Template
 # Register your models here.
 
-class PageAdmin(admin.ModelAdmin):
-    list_display = ('parent', 'title', 'description', 'template', 'created')
-    fields = ('parent', 'title', 'site', 'description', 'content', 'template')
+class PageAdmin(SortableAdminMixin, admin.ModelAdmin):
+    list_display = ('parent', 'title', 'color', 'template', 'created')
+    fields = ('parent', 'title', 'site', 'color', 'description', 'content', 'template')
     save_as = True
     show_fall_result_count = True
     view_on_site = True
