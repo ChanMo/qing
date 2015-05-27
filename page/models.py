@@ -8,6 +8,7 @@ from colorfield.fields import ColorField
 # Create your models here.
 class Theme(models.Model):
     name = models.CharField(max_length=200, verbose_name='Name')
+    value = models.CharField(max_length=200, verbose_name='Value')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Created')
     updated = models.DateTimeField(auto_now=True, verbose_name='Updated')
 

@@ -27,7 +27,7 @@ class PageAdmin(SortableAdminMixin, admin.ModelAdmin):
 
 
 class ThemeAdmin(admin.ModelAdmin):
-    list_display = ('name', 'created')
+    list_display = ('name', 'value', 'created')
 
 
 class TemplateAdmin(admin.ModelAdmin):

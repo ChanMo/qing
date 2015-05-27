@@ -10,18 +10,22 @@ class IndexView(TemplateView):
 
 class SiteView(TemplateView):
     modal = Site
+
+    def get_site(self):
+        site = Site.objects.filter(id=self.kwargs['site_id'])
+        return site
+
     def get_context_data(self, **kwargs):
         context = super(SiteView, self).get_context_data(**kwargs)
-        site = Site.objects.filter(author=context['site_id'])
-        self.site = site
+        site = self.get_site()
         context['page_list'] = Page.objects.filter(site=site,parent=None)
         return context
 
     def get_template_names(self):
-        print self.site.id
-        #theme = self.site.theme_id
+        site = self.get_site()
+        #theme = str(site.model.theme)
+        print site.model.__dict__
         theme = "default"
-
         return ("page/"+theme+"/index.html", "page/default/index.html")
 
 
