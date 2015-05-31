@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #'pillow',
     'ckeditor',
     'adminsortable2',
     'page',
@@ -110,6 +111,7 @@ STATIC_URL = '/static/'
 
 # ckeditor
 CKEDITOR_UPLOAD_PATH = 'uploads/'
+#CKEDITOR_IMAGE_BACKEND = 'pillow'
 CKEDITOR_JQUERY_URL = '//cdn.bootcss.com/jquery/2.1.4/jquery.min.js'
 CKEDITOR_RESTRICT_BY_USER = True
 CKEDITOR_CONFIGS = {

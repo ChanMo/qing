@@ -44,6 +44,7 @@ class Page(models.Model):
     title = models.CharField(max_length=200, verbose_name='Title')
     parent = models.ForeignKey('self', null=True, blank=True, default=None);
     site = models.ForeignKey(Site, related_name="Page", default='1')
+    icon = models.ImageField(upload_to='uploads/')
     color = ColorField()
     description = models.TextField(blank=True, verbose_name='Description')
     content = RichTextField(verbose_name='Content', config_name='awesome_ckeditor')
@@ -57,3 +58,12 @@ class Page(models.Model):
 
     class Meta(object):
         ordering = ('order',)
+
+    def icon_url(self):
+        if self.icon:
+            return u'<img src="%s" height="100">' % self.icon.url
+        else:
+            return ""
+
+    icon_url.short_description = 'Thumb'
+    icon_url.allow_tags = True
