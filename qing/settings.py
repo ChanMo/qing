@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'ckeditor',
     'adminsortable2',
     'page',
+    'message',
 )
 
 MIDDLEWARE_CLASSES = (

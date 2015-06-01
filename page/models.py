@@ -44,7 +44,7 @@ class Page(models.Model):
     title = models.CharField(max_length=200, verbose_name='Title')
     parent = models.ForeignKey('self', null=True, blank=True, default=None);
     site = models.ForeignKey(Site, related_name="Page", default='1')
-    icon = models.ImageField(upload_to='uploads/')
+    icon = models.ImageField(upload_to='uploads/', blank=True, null=True, default='')
     color = ColorField()
     description = models.TextField(blank=True, verbose_name='Description')
     content = RichTextField(verbose_name='Content', config_name='awesome_ckeditor')

@@ -6,6 +6,7 @@ from page.views import IndexView
 
 urlpatterns = [
     url(r'^$', IndexView.as_view()),
+    url(r'^m/message', include('message.urls', namespace='message')),
     url(r'^m/', include('page.urls', namespace='page')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^ckeditor/', include('ckeditor.urls')),
