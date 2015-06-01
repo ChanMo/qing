@@ -4,4 +4,4 @@
 
 media/uploads/
 db.sqlite3
-page/migrations/
+*/migrations/
