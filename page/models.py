@@ -47,7 +47,7 @@ class Page(models.Model):
     icon = models.ImageField(upload_to='uploads/', blank=True, null=True, default='')
     color = ColorField()
     description = models.TextField(blank=True, verbose_name='Description')
-    content = RichTextField(verbose_name='Content', config_name='awesome_ckeditor')
+    content = RichTextField(verbose_name='Content', config_name='awesome_ckeditor', blank=True, null=True, default='')
     template = models.ForeignKey(Template, related_name="Page", default='1', verbose_name='Template')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Created')
     updated = models.DateTimeField(auto_now=True, verbose_name='Updated')

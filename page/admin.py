@@ -5,7 +5,7 @@ from .models import Page, Theme, Site, Template
 
 class PageAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ('parent', 'title', 'icon_url', 'template', 'created')
-    fields = ('parent', 'title', 'site', 'icon', 'color', 'description', 'content', 'template')
+    fields = ('parent', 'title', 'site', 'icon', 'description', 'content', 'template')
     save_as = True
     show_fall_result_count = True
     view_on_site = True

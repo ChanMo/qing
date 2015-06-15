@@ -1,5 +1,6 @@
 from django.db import models
 from page.models import Site
+from django.forms import ModelForm
 # Create your models here.
 
 class Message(models.Model):
@@ -11,3 +12,9 @@ class Message(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class MessageForm(ModelForm):
+    class Meta:
+        model = Message
+        fields = ['site', 'name', 'mobile', 'content']
